@@ -1,7 +1,9 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.base import BaseModel
 # model the class after the friend table from our database
-class Ninja:
+class Ninja(BaseModel):
+    tablename = "ninjas"
     def __init__( self , data ):
         self.id = data['id']
         self.first_name = data['first_name']
@@ -19,6 +21,7 @@ class Ninja:
 
     @classmethod
     def from_dojo(cls, num):
+        query = cls.get_by_id(num)
         query = "SELECT * FROM ninjas WHERE dojo_id = {}".format(num)
         results = connectToMySQL('dojos_and_ninjas_schema').query_db( query )
         ninjas = []

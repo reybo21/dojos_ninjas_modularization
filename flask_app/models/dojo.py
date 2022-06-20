@@ -1,7 +1,9 @@
 # import the function that will return an instance of a connection
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.base import BaseModel
 # model the class after the friend table from our database
-class Dojo:
+class Dojo(BaseModel):
+    tablename = "dojos"
     def __init__( self , data ):
         self.id = data['id']
         self.name = data['name']

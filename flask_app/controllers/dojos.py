@@ -17,7 +17,7 @@ def ninjas():
 
 @app.route('/dojos/<int:num>')
 def display_dojo(num):
-    dojo = Dojo.get_name(num)
+    dojo = Dojo.get_by_id(num)
     ninjas = Ninja.from_dojo(num)
     return render_template("display_dojo.html", all_ninjas=ninjas, dojo_name=dojo)
 
